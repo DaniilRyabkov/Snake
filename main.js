@@ -1,3 +1,4 @@
+
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
@@ -9,6 +10,26 @@ var widthInBlocks = width / blockSize;
 var heightInBlocks = height / blockSize;
 
 var score = 0;
+
+var circle = function (x,y,radius,fillCircle){
+    ctx.beginPath();
+    ctx.arc(x,y,radius,0,Math.PI*2,false);
+    if (fillCircle){
+    ctx.fill();
+   }else{
+    ctx.stroke();
+   }
+};
+
+
+
+
+
+
+
+
+
+
 
 var drawBorder = function () {
     ctx.fillStyle = "Gray";
@@ -38,3 +59,27 @@ var gameOver = function () {
     ctx.fillText("Game over!", width / 2, height / 2);
 };
 gameOver();
+
+var Block = function (col, row) {
+    this.col = col;
+    this.row = row;
+};
+
+Block.prototype.drawSquare = function (color) {
+    var x = this.col * blockSize;
+    var y = this.row * blockSize;
+     ctx.fillStyle = color;
+     ctx.fillRect(x, y, blockSize, blockSize);
+};
+
+var sampleBlock = new Block(3, 4);
+sampleBlock.drawSquare("LightBlue");
+
+Block.prototype.drawCircle = function (color) {
+    var centerX = this.col * blockSize + blockSize / 2;
+    var centerY = this.row * blockSize + blockSize / 2;
+    ctx.fillStyle = color;
+    circle(centerX, centerY, blockSize / 2, true);
+};
+var sampleCircle = new Block(4, 3);
+sampleCircle.drawCircle("LightGreen");
