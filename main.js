@@ -86,3 +86,56 @@ Block.prototype.drawCircle = function (color) {
 //Set the color for the Block
 var sampleCircle = new Block(4, 3);
 sampleCircle.drawCircle("LightGreen");
+//To make it easier to compare cell positions, we will create a method and add it to the prototype property of the Block constructor
+Block.prototype.equal = function (otherBlock) {
+    return this.col === otherBlock.col && this.row === otherBlock.row;
+};
+//To move snake, we will add a new cell to the beginning of the segments array and remove the cell from the end.
+var Snake = function () {
+    this.segments = [   //Segment - Part
+        new Block(7, 5),
+        new Block(6, 5),
+        new Block(5, 5)
+    ];
+    this.direction = "right";
+    this.nextDirection = "right";
+};
+
+//methods drawSquare.So for each segment of the snake body in the corresponding cell a square will be drawn.
+Snake.prototype.draw = function () {
+    for (var i = 0; i < this.segments.length; i++) {
+        this.segments[i].drawSquare("Blue");
+    }
+};
+// 1 )) We save the first element of the array - the head of the snake
+// 2 )) We created a variable newHead - representing the new snake head
+// 3 )) We set this.direction to this.nextDirection - means the direction of movement of the snake will be match last arrow key pressed
+// 4 )) Depending on the direction we add or subtract one from the valuerow or column of the current head to place the new head right next to her
+// 5 )) We call the checkCollision method, to find out whether the snake crashed into its tail or into the wall.
+// 6 )) We will add a new head to it by adding unshift.newHead to the beginning of the array segments.
+Snake.prototype.move = function () {
+    var head = this.segments[0];
+    var newHead;
+    this.direction = this.nextDirection;
+    if (this.direction === "right") {
+        newHead = new Block(head.col + 1, head.row);
+    } else if (this.direction === "down") {
+        newHead = new Block(head.col, head.row + 1);
+    } else if (this.direction === "left") {
+        newHead = new Block(head.col - 1, head.row);
+    } else if (this.direction === "up") {
+        newHead = new Block(head.col, head.row - 1);
+    }
+    if (this.checkCollision(newHead)) {
+        gameOver();
+    return;
+}
+this.segments.unshift(newHead);
+if (newHead.equal(apple.position)) {
+    score++;
+    apple.move();
+} else {
+    this.segments.pop();
+}
+};
+
