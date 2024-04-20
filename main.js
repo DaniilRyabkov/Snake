@@ -209,7 +209,7 @@ $("body").keydown(function (event) {
 });
 
 /*
-_________________________________________________________________________________(Snake.prototype.setDirection)(Create an apple)______________________________________________________
+_________________________________________________________________________________(Snake.prototype.setDirection)______________________________________________________
 
 in line 1 consists of four parts - for
 handling the four invalid direction changes we want
@@ -224,7 +224,7 @@ on line 2.
 Create an apple
 In this game, an apple is an object with three components:
 the position property, which stores the position of the apple in the cell object type, the draw method, with which we will draw the apple
-on the screen, and the move method
+on the screen, and the move method.
 */
 
 Snake.prototype.setDirection = function (newDirection) {
@@ -239,3 +239,33 @@ Snake.prototype.setDirection = function (newDirection) {
 }
 this.nextDirection = newDirection;
 };
+//__________________________________________________________________________________(Create an apple)________________________________________________________________
+var Apple = function () {
+    this.position = new Block(10, 10);
+};
+
+Apple.prototype.draw = function () {
+    this.position.drawCircle("LimeGreen");
+};
+
+Apple.prototype.move = function () {
+    var randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
+    var randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) + 1;
+    this.position = new Block(randomCol, randomRow);
+};
+
+var snake = new Snake();
+var apple = new Apple();
+
+var intervalId = setInterval(function(){
+ctx.clearRect(0,0,width,height);
+drawScore();
+snake.move();
+snake.draw();
+apple.draw();
+drawBorder();
+},100);
+
+
+
+
