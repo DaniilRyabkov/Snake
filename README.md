@@ -2,10 +2,10 @@
 
 ###### :snake: SNAKE GAME :snake:
 
-https://github.com/DaniilRyabkov/Snake/assets/151777038/15c9caa8-e078-401b-bc36-c9f7b16dd292
 
 
-[Тhe game! :star: ](https://www.example.com)
+
+[Тhe game! :star: ](https://daniilryabkov.github.io/Snake/)
 
 
 #### Viewed from a top-down perspective, each player controls a "snake" with a fixed starting position.
