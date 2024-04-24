@@ -4,6 +4,10 @@
 
 
 
+https://github.com/DaniilRyabkov/Snake/assets/151777038/2e8a6f4e-2108-435a-b234-3703017c2d24
+
+
+
 
 [Тhe game! :star: ](https://daniilryabkov.github.io/Snake/)
 
